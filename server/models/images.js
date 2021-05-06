@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const imageSchema = new mongoose.Scheuma({
+const imageSchema = new mongoose.Schema({
 
     name: {
         type: String,
