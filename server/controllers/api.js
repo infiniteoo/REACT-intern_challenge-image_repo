@@ -1,16 +1,5 @@
-import multer from 'multer'
 import imgModel from '../models/images'
-
-let storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads')
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.fieldname + '-' + Date.now())
-    }
-})
-
-const upload = multer({ storage: storage })
+import upload from '../upload'
 
 
 export function getAllImages(req, res) {
@@ -22,4 +11,27 @@ export function getAllImages(req, res) {
             res.json(items)
         }
     })
+}
+
+
+export const postImage = (req, res, next) => {
+
+    let obj = {
+        name: req.body.name,
+        desc: req.body.desc,
+        img: {
+            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            contentType: 'image/png'
+        }
+    }
+
+    imgModel.create(obj, (err, item) => {
+        if (err) {
+            console.log(err)
+        } else {
+            // item.save();
+            res.redirect('/')
+        }
+    })
+
 }
