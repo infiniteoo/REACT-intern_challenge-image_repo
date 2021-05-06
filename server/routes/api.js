@@ -1,9 +1,9 @@
 const express = require("express")
 const router = express.Router()
 
-import { slash } from "../controllers/api"
+import { getAllImages } from "../controllers/api"
 
-router.get("/", slash)
+router.get("/", getAllImages)
 
 
 module.exports = router
