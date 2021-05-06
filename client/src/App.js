@@ -4,7 +4,7 @@ import FileUpload from './components/FilesUpload'
 const App = () => {
     return (
         <div>
-            <FileUpload/>
+            <h1>hello</h1>
         </div>
     )
 }
