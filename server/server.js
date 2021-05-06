@@ -9,6 +9,7 @@ import apiRoutes from './routes/api'
 
 // initialize the express server
 const app = express();
+global.__basedir = __dirname;
 
 // database
 mongoose.connect(process.env.DATABASE, {
@@ -28,7 +29,7 @@ app.use('/', apiRoutes)
 
 
 // define the server port
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8080;
 
 // launch the server
 app.listen(port, () => {
