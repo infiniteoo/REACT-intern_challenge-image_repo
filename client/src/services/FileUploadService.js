@@ -3,12 +3,12 @@ import { useState } from 'react'
 import {v4 as uuidv4} from 'uuid';
 import React from "react";
 
-const upload = (file, email, onUploadProgress) => {
+const upload = (file, onUploadProgress) => {
   
   let formData = new FormData();
   // add email to formdata
   formData.append("file", file);
-  formData.append("text", email);
+ 
   // console.log("formData",formData)
 
   return http.post("/upload", formData, {
@@ -19,9 +19,9 @@ const upload = (file, email, onUploadProgress) => {
   });
 };
 
-const getFiles = (props) => {
-  console.log('in getfiles, props', props)
-  return http.get("/files" + props.email);
+const getFiles = () => {
+  
+  return http.get("/files");
 };
 
 const FileUploadService = {
