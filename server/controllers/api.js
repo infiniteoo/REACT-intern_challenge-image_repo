@@ -1,5 +1,8 @@
 import imgModel from '../models/images'
-import upload from '../upload'
+import multer from 'multer'
+
+
+
 
 
 export function getAllImages(req, res) {
@@ -30,8 +33,9 @@ export const postImage = (req, res, next) => {
             console.log(err)
         } else {
             // item.save();
-            res.redirect('/')
+           res.json('hey there friend!')
         }
     })
 
 }
+
