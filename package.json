@@ -16,5 +16,6 @@
   "bugs": {
     "url": "https://github.com/infiniteoo/intern_challenge-image_repo/issues"
   },
-  "homepage": "https://github.com/infiniteoo/intern_challenge-image_repo#readme"
+  "homepage": "https://github.com/infiniteoo/intern_challenge-image_repo#readme",
+  "dependencies": {}
 }
