@@ -37,7 +37,7 @@ router.post('/', upload.single('image'), (req, res, next) => {
         }
         else {
             // item.save();
-            res.redirect('/');
+            res.json(item);
         }
     });
 });
