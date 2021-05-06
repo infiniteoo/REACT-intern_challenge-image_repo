@@ -5,17 +5,26 @@ import mongoose from 'mongoose'
 import 'dotenv/config'
 
 // import routes
-const apiRoutes = require('./routes/api')
+import apiRoutes from './routes/api'
 
 // initialize the express server
 const app = express();
+
+// database
+mongoose.connect(process.env.DATABASE, {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useUnifiedTopology: true
+})
+.then(() => console.log('database connected!'))
+.catch(err => console.log(err))
 
 // implement middlewear
 app.use(cors())
 app.use(morgan('dev'))
 
 // route middlewear
-app.use('/api', apiRoutes)
+app.use('/', apiRoutes)
 
 
 // define the server port
