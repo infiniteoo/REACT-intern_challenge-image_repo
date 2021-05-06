@@ -18,12 +18,12 @@ export function getAllImages(req, res) {
 
 
 export const postImage = (req, res, next) => {
-
+    console.log('../uploads/')
     let obj = {
         name: req.body.name,
         desc: req.body.desc,
         img: {
-            data: fs.readFileSync(path.join(__dirname + '/uploads/' + req.file.filename)),
+            data: fs.readFileSync(path.join('/uploads/' + req.file.filename)),
             contentType: 'image/png'
         }
     }
@@ -33,7 +33,7 @@ export const postImage = (req, res, next) => {
             console.log(err)
         } else {
             // item.save();
-           res.json('hey there friend!')
+           res.redirect('/')
         }
     })
 

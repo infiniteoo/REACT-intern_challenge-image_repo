@@ -3,6 +3,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import mongoose from 'mongoose'
 import 'dotenv/config'
+var bodyParser = require('body-parser');
 
 // import routes
 import apiRoutes from './routes/api'
@@ -23,6 +24,8 @@ mongoose.connect(process.env.DATABASE, {
 // implement middlewear
 app.use(cors())
 app.use(morgan('dev'))
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 // route middlewear
 app.use('/', apiRoutes)
