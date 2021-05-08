@@ -4,12 +4,14 @@ import FormData from "form-data";
 import FilePicker from "./FilePicker";
 import { Typography, TextField, Button, Box } from "@material-ui/core";
 import useStyles from "./FileUploadStyles";
+import FullScreenDialog from './FullScreenDialog'
 
 const FilesUpload = (props) => {
   const classes = useStyles();
   const { setAllPics } = props;
   const [state, setState] = useState({ name: "", desc: "" });
   const [selectedFile, setSelectedFile] = useState(null);
+  const [open, setOpen] = React.useState(false);
 
   const getEm = () => {
     axios.get("http://localhost:8080").then((res) => setAllPics(res.data));
@@ -31,6 +33,13 @@ const FilesUpload = (props) => {
 
     console.log(state);
   }
+
+  const handleLogin = (e) => {
+
+    setOpen(true)
+
+
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -115,6 +124,17 @@ const FilesUpload = (props) => {
           </Button>
         </form>
       </Box>
+      <Button
+        type="submit"
+        variant="contained"
+        color="default"
+        onClick={(e) => handleLogin(e)}
+        className={classes.uploadButton}
+        InputProps={{ className: classes.textField }}
+      >
+        Login
+      </Button>
+      <FullScreenDialog open={open} setOpen={setOpen}/>
       <hr />
       <br />
     </>
