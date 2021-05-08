@@ -8,12 +8,24 @@ const FilesUpload = () => {
 
   useEffect(() => {
     // query the server for all of the picture objects
+
+    const getEm = async () => {
+      let rez = await axios.get("http://localhost:8080");
+      setAllPics(rez.data);
+    };
+    getEm();
   }, [imageData]);
 
   const handleChange = (e) => {
     e.preventDefault();
     setState(e.target.value);
   };
+
+  function encode(data) {
+    let buf = Buffer.from(data);
+    let base64 = buf.toString("base64");
+    return base64;
+  }
 
   return (
     <>
@@ -64,7 +76,11 @@ const FilesUpload = () => {
         <div>
           {allPics.map((item, index) => (
             <div key={index}>
-              <div></div>
+              <div>{item.name}</div>
+              <div>{item.desc}</div>
+              {/* <Image src={`data:image/jpg;base64,${encode(item.imgURL)}`}/> */}
+              {/* <img src={`data:image/jpeg;base64,${encode(item.imgURL)}`} width={"200px"} height={"200px"}/> */}
+              <img src={`${item.imgURL}`} width={"200px"} height={"200px"}/>
             </div>
           ))}
         </div>
