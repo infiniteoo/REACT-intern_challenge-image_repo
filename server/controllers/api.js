@@ -17,7 +17,9 @@ export function getAllImages(req, res) {
 
 export const postImage = (req, res, next) => {
 
- 
+  console.log('-------------------------')
+  console.log(req.body)
+  console.log('-------------------------')
   /* singleUpload(req, res, function (err) {
     if (err) {
       return res.status(422).send({

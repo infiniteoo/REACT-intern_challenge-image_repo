@@ -1,135 +1,121 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import FormData from 'form-data'
-
+import FormData from "form-data";
+import FileInput from "./FileInput";
+import { Typography, TextField, Button } from "@material-ui/core";
+import useStyles from "./FileUploadStyles";
 
 const FilesUpload = (props) => {
-  const { allPics, setAllPics } = props;
-  const [state, setState] = useState({name: "", desc: ""});
-  const [selectedFile, setSelectedFile] = useState(null)
-    
+  const classes = useStyles();
+  const { setAllPics } = props;
+  const [state, setState] = useState({ name: "", desc: "" });
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const getEm = () => {
     axios.get("http://localhost:8080").then((res) => setAllPics(res.data));
-    /* setAllPics(rez.data); */
-    
   };
 
   useEffect(() => {
     // query the server for all of the picture objects
 
-   
     getEm();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
- 
 
   function handleChange(e) {
     const value = e.target.value;
     setState({
       ...state,
-      [e.target.name]: value
+      [e.target.name]: value,
     });
 
-    console.log(state)
+    console.log(state);
   }
-
- 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    let form = document.getElementById('picUploadForm')
+    let form = document.getElementById("picUploadForm");
 
     let formData = new FormData(form);
 
-  
+    formData.append("image", selectedFile);
 
-  
-   
-   
-    const url = "http://localhost:8080/image-upload"
+    const url = "http://localhost:8080/image-upload";
 
     const config = {
       headers: {
-        'accept': 'application/json',
-        'Accept-Language': 'en-US,en;q=0.8',
-        'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
-      }
-  }
-   
-  const getEm = () => {
-    axios.get("http://localhost:8080").then((res) => setAllPics(res.data));
-    /* setAllPics(rez.data); */
-    
+        accept: "application/json",
+        "Accept-Language": "en-US,en;q=0.8",
+        "Content-Type": `multipart/form-data; boundary=${formData._boundary}`,
+      },
+    };
+
+    const getEm = () => {
+      axios.get("http://localhost:8080").then((res) => setAllPics(res.data));
+      /* setAllPics(rez.data); */
+    };
+
+    axios
+      .post(url, formData, config)
+      .then((res) => {
+        setState({ name: "", desc: "" });
+        getEm();
+      })
+      .catch((err) => alert("File Upload Error"));
   };
-    
-    console.log('pre-send', state.name, state.desc, selectedFile)
-    console.log('FORM DATA', formData)
-    axios.post(url,formData, config)
-    .then((res) => {
-      setState({name: "", desc: ""})
-      getEm()
-    })
-    .catch((err) => alert("File Upload Error"))
-
-   
-   
-     
-   
-
-  }
 
   return (
     <>
-      
       <hr />
       <div>
-        <form
-          id="picUploadForm"
-        /* action="http://localhost:8080/image-upload"
-          method="POST" 
-          
-          encType="multipart/form-data" */
-          
-          
-        >
-          <div>
-            <label>Image Title</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Name"
-              name="name"
-              onChange={(e) =>handleChange(e)}
-              value={state.name}
-            />
-          </div>
-          <div>
-            <label htmlFor="desc">Image Description</label>
-            <textarea
-              id="desc"
-              name="desc"
-              rows="2"
-              placeholder="Description"
-              onChange={(e) =>handleChange(e)}
-              value={state.desc}
-            />
-          </div>
-          <div>
-            <label htmlFor="image">Upload Image</label>
-            <input type="file" id="image" name="image" value={selectedFile?.filename}
-            onChange={(e) => setSelectedFile(e.target.files[0])} required />
-          </div>
-          <div>
-            <button type="submit" onClick={(e) => handleSubmit(e)}>Submit</button>
-          </div>
+        <form id="picUploadForm">
+          <Typography variant="caption">Title: </Typography>
+          <TextField
+            id="name"
+            type="text"
+            name="name"
+            onChange={(e) => handleChange(e)}
+            value={state.name}
+            InputProps={{ className: classes.textField }}
+          />
+
+          <Typography variant="caption">Description: </Typography>
+          <TextField
+            id="desc"
+            type="text"
+            name="desc"
+            onChange={(e) => handleChange(e)}
+            value={state.desc}
+            InputProps={{ className: classes.textField }}
+          />
+          <FileInput
+            buttonProps={{
+              color: "secondary",
+            }}
+            id="image"
+            type="file"
+            name="image"
+            onChange={(e) => {
+              setSelectedFile(e.target.files[0]);
+              console.log(selectedFile);
+            }}
+            value={selectedFile}
+          />
+
+          <Button
+            type="submit"
+            variant="contained"
+            color="default"
+            onClick={(e) => handleSubmit(e)}
+            InputProps={{ className: classes.textField }}
+          >
+            Upload Image
+          </Button>
         </form>
       </div>
       <hr />
       <br />
-      
-      
-       
     </>
   );
 };

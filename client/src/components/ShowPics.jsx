@@ -1,15 +1,12 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import {
   Typography,
-  AppBar,
   Card,
   CardActions,
   CardContent,
   CardMedia,
   CssBaseline,
   Grid,
-  Toolbar,
   Container,
   Button,
 } from "@material-ui/core";
@@ -17,7 +14,7 @@ import useStyles from "./ShowPicsStyles";
 
 
 const ShowPics = (props) => {
-    let { allPics, setAllPics } = props
+    let { allPics  } = props
     const classes = useStyles();
     return (
        <>
