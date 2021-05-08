@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import FormData from "form-data";
-import FileInput from "./FileInput";
-import { Typography, TextField, Button } from "@material-ui/core";
+import FilePicker from "./FilePicker";
+import { Typography, TextField, Button, Box } from "@material-ui/core";
 import useStyles from "./FileUploadStyles";
 
 const FilesUpload = (props) => {
@@ -68,7 +68,7 @@ const FilesUpload = (props) => {
   return (
     <>
       <hr />
-      <div>
+      <Box className={classes.uploadContainer}>
         <form id="picUploadForm">
           <Typography variant="caption">Title: </Typography>
           <TextField
@@ -89,7 +89,7 @@ const FilesUpload = (props) => {
             value={state.desc}
             InputProps={{ className: classes.textField }}
           />
-          <FileInput
+          <FilePicker
             buttonProps={{
               color: "secondary",
             }}
@@ -108,12 +108,13 @@ const FilesUpload = (props) => {
             variant="contained"
             color="default"
             onClick={(e) => handleSubmit(e)}
+            className={classes.uploadButton}
             InputProps={{ className: classes.textField }}
           >
             Upload Image
           </Button>
         </form>
-      </div>
+      </Box>
       <hr />
       <br />
     </>
