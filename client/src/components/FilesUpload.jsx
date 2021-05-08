@@ -14,7 +14,7 @@ const FilesUpload = () => {
       setAllPics(rez.data);
     };
     getEm();
-  }, [imageData]);
+  }, [allPics]);
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -71,24 +71,27 @@ const FilesUpload = () => {
       <hr />
       <br />
       <h1>uploaded files</h1>
-
-      {allPics.length > 0 ? (
-        <div>
-          {allPics.map((item, index) => (
-            <div key={index}>
-              <div>{item.name}</div>
-              <div>{item.desc}</div>
-              {/* <Image src={`data:image/jpg;base64,${encode(item.imgURL)}`}/> */}
-              {/* <img src={`data:image/jpeg;base64,${encode(item.imgURL)}`} width={"200px"} height={"200px"}/> */}
-              <img src={`${item.imgURL}`} width={"200px"} height={"200px"}/>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <>
-          <h5>Loading..</h5>
-        </>
-      )}
+      <div className="container" style={{display: "flex", flexDirection: "row", flexFlow: "row"}}>
+        {allPics.length > 0 ? (
+            <>
+              {allPics.map((item, index) => (
+                <div key={index}>
+                  <div>{item.name}</div>
+                  <div>{item.desc}</div>
+                  <div>{item.user}</div>
+                  <img src={`${item.imgURL}`}  height={"200px"}/>
+                </div>
+              ))}
+            </>
+          ) 
+        : (
+          <>
+            <h5>Loading..</h5>
+          </>
+        )}
+     </div>
+      
+       
     </>
   );
 };
