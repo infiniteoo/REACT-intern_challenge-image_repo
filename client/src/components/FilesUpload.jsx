@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-const FilesUpload = () => {
-  const [allPics, setAllPics] = useState([]);
+const FilesUpload = (props) => {
+  const { allPics, setAllPics } = props;
   const [state, setState] = useState({});
-  const [imageData, setImageData] = useState([]);
+ 
 
   useEffect(() => {
     // query the server for all of the picture objects
@@ -20,12 +20,6 @@ const FilesUpload = () => {
     e.preventDefault();
     setState(e.target.value);
   };
-
-  function encode(data) {
-    let buf = Buffer.from(data);
-    let base64 = buf.toString("base64");
-    return base64;
-  }
 
   return (
     <>
@@ -70,8 +64,8 @@ const FilesUpload = () => {
       </div>
       <hr />
       <br />
-      <h1>uploaded files</h1>
-      <div className="container" style={{display: "flex", flexDirection: "row", flexFlow: "row"}}>
+      {/* <h1>uploaded files</h1>
+      <div className="container" style={{display: "flex", flexFlow: "row"}}>
         {allPics.length > 0 ? (
             <>
               {allPics.map((item, index) => (
@@ -79,7 +73,7 @@ const FilesUpload = () => {
                   <div>{item.name}</div>
                   <div>{item.desc}</div>
                   <div>{item.user}</div>
-                  <img src={`${item.imgURL}`}  height={"200px"}/>
+                  <img src={`${item.imgURL}`} height={"200px"} alt={item.name}/>
                 </div>
               ))}
             </>
@@ -89,7 +83,7 @@ const FilesUpload = () => {
             <h5>Loading..</h5>
           </>
         )}
-     </div>
+     </div> */}
       
        
     </>
