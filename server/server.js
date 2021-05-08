@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 // import routes
 import apiRoutes from './routes/api'
 
+
 // initialize the express server
 const app = express();
 global.__basedir = __dirname;
