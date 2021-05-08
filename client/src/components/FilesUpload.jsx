@@ -1,35 +1,97 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import FormData from 'form-data'
+
 
 const FilesUpload = (props) => {
   const { allPics, setAllPics } = props;
-  const [state, setState] = useState({});
- 
+  const [state, setState] = useState({name: "", desc: ""});
+  const [selectedFile, setSelectedFile] = useState(null)
+    
+  const getEm = () => {
+    axios.get("http://localhost:8080").then((res) => setAllPics(res.data));
+    /* setAllPics(rez.data); */
+    
+  };
 
   useEffect(() => {
     // query the server for all of the picture objects
 
-    const getEm = async () => {
-      let rez = await axios.get("http://localhost:8080");
-      setAllPics(rez.data);
-    };
+   
     getEm();
-  }, [allPics]);
+  }, []);
 
-  const handleChange = (e) => {
+ 
+
+  function handleChange(e) {
+    const value = e.target.value;
+    setState({
+      ...state,
+      [e.target.name]: value
+    });
+
+    console.log(state)
+  }
+
+ 
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setState(e.target.value);
+
+    let form = document.getElementById('picUploadForm')
+
+    let formData = new FormData(form);
+
+  
+
+  
+   
+   
+    const url = "http://localhost:8080/image-upload"
+
+    const config = {
+      headers: {
+        'accept': 'application/json',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+      }
+  }
+   
+  const getEm = () => {
+    axios.get("http://localhost:8080").then((res) => setAllPics(res.data));
+    /* setAllPics(rez.data); */
+    
   };
+    
+    console.log('pre-send', state.name, state.desc, selectedFile)
+    console.log('FORM DATA', formData)
+    axios.post(url,formData, config)
+    .then((res) => {
+      setState({name: "", desc: ""})
+      getEm()
+    })
+    .catch((err) => alert("File Upload Error"))
+
+   
+   
+     
+   
+
+  }
 
   return (
     <>
-      <h1>upload an image</h1>
+      
       <hr />
       <div>
         <form
-          action="http://localhost:8080/image-upload"
-          method="POST"
-          encType="multipart/form-data"
+          id="picUploadForm"
+        /* action="http://localhost:8080/image-upload"
+          method="POST" 
+          
+          encType="multipart/form-data" */
+          
+          
         >
           <div>
             <label>Image Title</label>
@@ -38,7 +100,7 @@ const FilesUpload = (props) => {
               id="name"
               placeholder="Name"
               name="name"
-              onChange={handleChange}
+              onChange={(e) =>handleChange(e)}
               value={state.name}
             />
           </div>
@@ -49,41 +111,23 @@ const FilesUpload = (props) => {
               name="desc"
               rows="2"
               placeholder="Description"
-              onChange={handleChange}
+              onChange={(e) =>handleChange(e)}
               value={state.desc}
             />
           </div>
           <div>
             <label htmlFor="image">Upload Image</label>
-            <input type="file" id="image" name="image" required />
+            <input type="file" id="image" name="image" value={selectedFile?.filename}
+            onChange={(e) => setSelectedFile(e.target.files[0])} required />
           </div>
           <div>
-            <button type="submit">Submit</button>
+            <button type="submit" onClick={(e) => handleSubmit(e)}>Submit</button>
           </div>
         </form>
       </div>
       <hr />
       <br />
-      {/* <h1>uploaded files</h1>
-      <div className="container" style={{display: "flex", flexFlow: "row"}}>
-        {allPics.length > 0 ? (
-            <>
-              {allPics.map((item, index) => (
-                <div key={index}>
-                  <div>{item.name}</div>
-                  <div>{item.desc}</div>
-                  <div>{item.user}</div>
-                  <img src={`${item.imgURL}`} height={"200px"} alt={item.name}/>
-                </div>
-              ))}
-            </>
-          ) 
-        : (
-          <>
-            <h5>Loading..</h5>
-          </>
-        )}
-     </div> */}
+      
       
        
     </>
