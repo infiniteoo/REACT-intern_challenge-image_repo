@@ -1,4 +1,6 @@
 import imgModel from "../models/images";
+const upload = require("../services/image-upload");
+const singleUpload = upload.single("image");
 
 export function getAllImages(req, res) {
   imgModel.find({}, (err, items) => {
@@ -12,18 +14,48 @@ export function getAllImages(req, res) {
 }
 
 export const postImage = (req, res, next) => {
-  const upload = require("../services/image-upload");
-  const singleUpload = upload.single("image");
+
   
+
+
+  
+
   singleUpload(req, res, function (err) {
+
+   
     if (err) {
-      return res
-        .status(422)
-        .send({
-          errors: [{ title: "Image Upload Error", detail: err.message }],
-        });
+      return res.status(422).send({
+        errors: [{ title: "Image Upload Error", detail: err.message }],
+      });
     }
-    console.log("grats u made it this far");
+
+    imgModel.create(
+        {
+          name: req.body.name,
+          desc: req.body.desc,
+          imgURL: req.file.location
+          
+        },
+        {},
+        (error, success) => {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log(success);
+          }
+        }
+      );
+
+    // create new imgModel db item with req.body.name, req.body.desc, and req.file.location
+
     return res.json({ imageUrl: req.file.location });
   });
+
+ 
+
+ 
+
+  
+
+  
 };

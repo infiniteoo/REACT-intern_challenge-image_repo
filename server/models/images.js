@@ -14,9 +14,8 @@ const imageSchema = new mongoose.Schema({
         type: String
     },
 
-    img: {
-        data: Buffer,
-        contentType: String
+    imgURL: {
+      type: String
     },
 
     user: {
