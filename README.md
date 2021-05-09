@@ -30,6 +30,11 @@
 </p>
 
 ## Live Version:
+
+Demo Login:
+Login: a@a.com
+PW: 123
+
 ### https://imagerep0.netlify.app/
 
 <!-- TABLE OF CONTENTS -->
