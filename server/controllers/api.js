@@ -1,8 +1,12 @@
 
-import imgModel from "../models/images";
-import userModel from '../models/user';
-import upload from "../services/image-upload";
-import { v4 as uuidv4 } from 'uuid';
+const imgModel = require('../models/images');
+/* import imgModel from "../models/images"; */
+const userModel = require('../models/user');
+/* import userModel from '../models/user'; */
+const upload = require('../services/image-upload')
+/* import upload from "../services/image-upload"; */
+const { v4: uuidv4 } = require('uuid');
+/* import { v4 as uuidv4 } from 'uuid'; */
 
 const singleUpload = upload.single("image");
 

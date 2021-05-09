@@ -1,10 +1,13 @@
-import express from 'express'
+const express = require('express')
+/* import express from 'express' */
 const router = express.Router()
-import upload from '../services/image-upload'
+const upload = require('../services/image-upload')
+/* import upload from '../services/image-upload' */
 
 
 const singleUpload = upload.single("image");
-import { getAllImages, postImage, deleteImage, login } from "../controllers/api"
+/* import { getAllImages, postImage, deleteImage, login } from "../controllers/api" */
+const { getAllImages, postImage, deleteImage, login } = require("../controllers/api")
 
 
 

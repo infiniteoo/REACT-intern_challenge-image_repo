@@ -1,8 +1,13 @@
-import express from 'express'
-import morgan from 'morgan'
-import cors from 'cors'
-import mongoose from 'mongoose'
-import 'dotenv/config'
+const express = require('express')
+/* import express from 'express' */
+const morgan = require('morgan')
+/* import morgan from 'morgan' */
+const cors = require('cors')
+/* import cors from 'cors' */
+const mongoose = require('mongoose')
+/* import mongoose from 'mongoose' */
+require('dotenv').config()
+/* import 'dotenv/config' */
 var bodyParser = require('body-parser');
 
 // import routes
