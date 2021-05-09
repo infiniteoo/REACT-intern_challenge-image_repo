@@ -51,7 +51,7 @@ export default function FullScreenDialog(props) {
            
           </Toolbar>
         </AppBar>
-        <LoginForm user={props.user} setUser={props.setUser}/>
+        <LoginForm user={props.user} setUser={props.setUser} open={props.open} setOpen={props.setOpen}/>
         
       </Dialog>
     </div>

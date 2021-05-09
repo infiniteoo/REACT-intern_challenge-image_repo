@@ -38,7 +38,8 @@ const LoginForm = (props) => {
             username: res.data.username
 
         })
-        console.log("LOGGED IN USER: ", props.user)  
+        console.log("LOGGED IN USER: ", props.user)
+        props.setOpen(false);  
       })
       .catch((err) => {
           console.log(err)
