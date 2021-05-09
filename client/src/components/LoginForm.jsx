@@ -7,9 +7,9 @@ import {
   Container,
 } from "@material-ui/core";
 import useStyles from "./LoginFormStyles";
-import bgImage from "../assets/background.jpg";
+import axios from 'axios'
 
-const LoginForm = () => {
+const LoginForm = (props) => {
   const [loginAndPassword, setLoginAndPassword] = useState("");
   const classes = useStyles();
 
@@ -21,6 +21,33 @@ const LoginForm = () => {
     });
 
     console.log(loginAndPassword);
+  }
+
+  const handleLogin = (e) => {
+      e.preventDefault();
+      let enteredEmail = document.getElementById("login").value
+      let enteredPassword = document.getElementById("pw").value
+      
+      axios.get(`http://localhost:8080/login/${enteredEmail}/${enteredPassword}`)
+      .then((res) => {
+          
+        props.setUser({
+            ...props.user,
+            loggedIn: "true",
+            email: res.data.email,
+            username: res.data.username
+
+        })
+        console.log("LOGGED IN USER: ", props.user)  
+      })
+      .catch((err) => {
+          console.log(err)
+      })
+
+
+      
+      
+
   }
 
   return (
@@ -53,7 +80,7 @@ const LoginForm = () => {
             InputProps={{ className: classes.textField }}
           />
         </Container>
-        <Button autoFocus color="secondary" onClick={""} fullWidth>
+        <Button autoFocus color="secondary" onClick={(e) => handleLogin(e)} fullWidth>
           Submit
         </Button>
       </Box>

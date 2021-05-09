@@ -12,6 +12,7 @@ import useStyles from "./AppStyles";
 
 const App = () => {
   const [allPics, setAllPics] = useState([]);
+  const [user, setUser] = useState({name: "", email: "", loggedIn: "false"})
   const classes = useStyles();
   return (
     <div>
@@ -19,7 +20,8 @@ const App = () => {
         <Toolbar>
           <PhotoCamera className={classes.icon} />
           <Typography variant="h6">Shopify™ Images</Typography>
-          <FileUpload allPics={allPics} setAllPics={setAllPics} />
+          <FileUpload allPics={allPics} setAllPics={setAllPics} user={user} setUser={setUser} />
+          
         </Toolbar>
       </AppBar>
       

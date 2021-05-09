@@ -4,7 +4,7 @@ import FormData from "form-data";
 import FilePicker from "./FilePicker";
 import { Typography, TextField, Button, Box } from "@material-ui/core";
 import useStyles from "./FileUploadStyles";
-import FullScreenDialog from './FullScreenDialog'
+import FullScreenDialog from "./FullScreenDialog";
 
 const FilesUpload = (props) => {
   const classes = useStyles();
@@ -14,7 +14,10 @@ const FilesUpload = (props) => {
   const [open, setOpen] = React.useState(false);
 
   const getEm = () => {
-    axios.get("http://localhost:8080").then((res) => {setAllPics(res.data); console.log(props.allPics)});
+    axios.get("http://localhost:8080").then((res) => {
+      setAllPics(res.data);
+      console.log(props.allPics);
+    });
   };
 
   useEffect(() => {
@@ -35,10 +38,15 @@ const FilesUpload = (props) => {
   }
 
   const handleLogin = (e) => {
+    setOpen(true);
+  };
 
-    setOpen(true)
-
-
+  const handleLogout = (e) => {
+    props.setUser({
+      loggedIn: false,
+      username: "",
+      email: ""
+    })
   };
 
   const handleSubmit = async (e) => {
@@ -124,17 +132,39 @@ const FilesUpload = (props) => {
           </Button>
         </form>
       </Box>
-      <Button
-        type="submit"
-        variant="contained"
-        color="default"
-        onClick={(e) => handleLogin(e)}
-        className={classes.uploadButton}
-        InputProps={{ className: classes.textField }}
-      >
-        Login
-      </Button>
-      <FullScreenDialog open={open} setOpen={setOpen}/>
+      {console.log(props.user.loggedIn)}
+      {props.user.loggedIn === "true" ? (
+        <>
+          <h5>hello {props.user.username}</h5>
+          <Button
+          type="button"
+          variant="contained"
+          color="default"
+          onClick={(e) => handleLogout(e)}
+          className={classes.uploadButton}
+          InputProps={{ className: classes.textField }}
+          
+          >Logout</Button>
+        </>
+      ) : (
+        <Button
+          type="submit"
+          variant="contained"
+          color="default"
+          onClick={(e) => handleLogin(e)}
+          className={classes.uploadButton}
+          InputProps={{ className: classes.textField }}
+        >
+          Login
+        </Button>
+      )}
+
+      <FullScreenDialog
+        open={open}
+        setOpen={setOpen}
+        user={props.user}
+        setUser={props.setUser}
+      />
       <hr />
       <br />
     </>
