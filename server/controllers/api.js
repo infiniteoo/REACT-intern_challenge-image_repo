@@ -71,7 +71,7 @@ export const login = (req, res) => {
       console.log(req.params.password, docs[0].password)
       
       
-      req.params.password === docs[0].password ? res.json("VALIDATED!") : res.json("DENIED!")
+      req.params.password === docs[0].password ? res.json(docs[0]) : res.json("DENIED!")
       
     }
   })
