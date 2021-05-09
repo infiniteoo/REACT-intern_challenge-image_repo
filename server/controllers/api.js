@@ -1,3 +1,4 @@
+
 import imgModel from "../models/images";
 import userModel from '../models/user';
 import upload from "../services/image-upload";
@@ -66,14 +67,19 @@ export const login = (req, res) => {
     if (err) {
       console.log(err)
     } else {
-      console.log('user found!', docs)
+      console.log('docs',docs)
+      console.log(req.params.password, docs[0].password)
+      
+      
+      req.params.password === docs[0].password ? res.json("VALIDATED!") : res.json("DENIED!")
+      
     }
   })
 
   // if we find it, compare the send password to what's in the DB
 
 
-  res.json('u won')  
+  
 
 
 }
