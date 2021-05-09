@@ -22,10 +22,10 @@ const ShowPics = (props) => {
 
     // extract the user's name who created the picture that was clicked
     let createdBy =
-      e.target.parentNode.parentNode.previousSibling.childNodes[2].innerHTML;
+      e.target.parentNode.parentNode.previousSibling.childNodes[4].innerHTML;
     console.log("createdby", createdBy, "props.user.name", props.user.email);
 
-    if (props.user.email === createdBy) {
+    /* if (props.user.email === createdBy) {
       console.log("we found a match!!");
       const itemID = e.target.parentElement.id;
       // send axios request to back end to delete with the id
@@ -41,7 +41,7 @@ const ShowPics = (props) => {
         });
     } else {
       console.log("no match. CANNOT DELETE.");
-    }
+    } */
   };
 
   return (
@@ -62,7 +62,10 @@ const ShowPics = (props) => {
                     {" "}
                     {picture.name}
                   </Typography>
+                 
                   <Typography>{picture.desc}</Typography>
+                  <br/>
+                  <Typography color="textSecondary">Uploader:</Typography>
                   <Typography id="creator">{picture.user}</Typography>
                 </CardContent>
                 <CardActions>

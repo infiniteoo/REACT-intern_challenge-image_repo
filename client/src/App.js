@@ -9,10 +9,13 @@ import {
 } from "@material-ui/core";
 import { PhotoCamera } from "@material-ui/icons";
 import useStyles from "./AppStyles";
+import { v4 as uuidv4 } from 'uuid';
+
 
 const App = () => {
   const [allPics, setAllPics] = useState([]);
-  const [user, setUser] = useState({name: "", email: "", loggedIn: "false"})
+  // until user authenticates, we give the guest user a random name and email
+  const [user, setUser] = useState({name: uuidv4(), email: uuidv4(), loggedIn: "false"})
   const classes = useStyles();
   return (
     <div>

@@ -137,7 +137,7 @@ const FilesUpload = (props) => {
           </Button>
         </form>
       </Box>
-      {console.log(props.user.loggedIn)}
+      {console.log("props.user",props.user)}
       {props.user.loggedIn === "true" ? (
         <>
           <h5>hello {props.user.username}</h5>
