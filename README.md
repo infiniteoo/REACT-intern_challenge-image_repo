@@ -21,7 +21,7 @@
     <a href="https://github.com/infiniteoo/intern_challenge-image_repo"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://imagorep0.netlify.app/">View Demo</a>
+    <a href="https://imagerep0.netlify.app/">View Demo</a>
     ·
     <a href="https://github.com/infiniteoo/intern_challenge-image_repo/issues">Report Bug</a>
     ·
@@ -30,7 +30,7 @@
 </p>
 
 ## Live Version:
-### https://imagorep0.netlify.app/
+### https://imagerep0.netlify.app/
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
