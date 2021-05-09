@@ -58,6 +58,9 @@ const FilesUpload = (props) => {
 
     formData.append("image", selectedFile);
 
+    // add the user name to the output object
+    formData.append("user", props.user.username)
+
     const url = "http://localhost:8080/image-upload";
 
     const config = {
@@ -76,7 +79,7 @@ const FilesUpload = (props) => {
     axios
       .post(url, formData, config)
       .then((res) => {
-        setState({ name: "", desc: "" });
+        setState({ username: "", desc: "", email: "" });
         getEm();
       })
       .catch((err) => alert("File Upload Error"));

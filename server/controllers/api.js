@@ -2,6 +2,7 @@
 import imgModel from "../models/images";
 import userModel from '../models/user';
 import upload from "../services/image-upload";
+import { v4 as uuidv4 } from 'uuid';
 
 const singleUpload = upload.single("image");
 
@@ -33,11 +34,15 @@ export function deleteImage(req, res) {
 }
 
 export const postImage = (req, res, next) => {
+
+  const userToSend = req.body.user || "Guest" + uuidv4()
+
   imgModel.create(
     {
       name: req.body.name,
       desc: req.body.desc,
       imgURL: req.file.location,
+      user: userToSend
     },
 
     (error, success) => {
