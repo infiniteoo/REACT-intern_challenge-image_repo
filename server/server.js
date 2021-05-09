@@ -11,7 +11,8 @@ require('dotenv').config()
 var bodyParser = require('body-parser');
 
 // import routes
-import apiRoutes from './routes/api'
+const apiRoutes = require('./routes/api')
+/* import apiRoutes from './routes/api' */
 
 
 // initialize the express server

@@ -30,10 +30,10 @@ const ShowPics = (props) => {
       const itemID = e.target.parentElement.id;
       // send axios request to back end to delete with the id
       axios
-        .delete(`http://localhost:8080/delete/${itemID}`)
+        .delete(`https://imagerep0.herokuapp.com//delete/${itemID}`)
         .then((res) => {
           axios
-            .get("http://localhost:8080")
+            .get("https://imagerep0.herokuapp.com/")
             .then((res) => props.setAllPics(res.data));
         })
         .catch((err) => {

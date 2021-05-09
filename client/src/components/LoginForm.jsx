@@ -28,7 +28,7 @@ const LoginForm = (props) => {
       let enteredEmail = document.getElementById("login").value
       let enteredPassword = document.getElementById("pw").value
       
-      axios.get(`http://localhost:8080/login/${enteredEmail}/${enteredPassword}`)
+      axios.get(`https://imagerep0.herokuapp.com/login/${enteredEmail}/${enteredPassword}`)
       .then((res) => {
           
         props.setUser({

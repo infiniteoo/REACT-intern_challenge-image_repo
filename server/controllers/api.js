@@ -10,7 +10,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const singleUpload = upload.single("image");
 
-export function getAllImages(req, res) {
+function getAllImages(req, res) {
   imgModel.find({}, (err, items) => {
     if (err) {
       console.log(err);
@@ -21,7 +21,7 @@ export function getAllImages(req, res) {
   });
 }
 
-export function deleteImage(req, res) {
+function deleteImage(req, res) {
   let ObjectId = require("mongodb").ObjectID;
 
   console.log(req.params.id);
@@ -37,7 +37,7 @@ export function deleteImage(req, res) {
   });
 }
 
-export const postImage = (req, res, next) => {
+const postImage = (req, res, next) => {
 
   const userToSend = req.body.user || "Guest" + uuidv4()
 
@@ -61,7 +61,7 @@ export const postImage = (req, res, next) => {
 };
 
 
-export const login = (req, res) => {
+const login = (req, res) => {
 
   
 
@@ -92,3 +92,4 @@ export const login = (req, res) => {
 
 
 }
+module.exports = {getAllImages, deleteImage, postImage, login, singleUpload }

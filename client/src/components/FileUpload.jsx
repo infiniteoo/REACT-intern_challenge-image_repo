@@ -14,7 +14,7 @@ const FilesUpload = (props) => {
   const [open, setOpen] = React.useState(false);
 
   const getEm = () => {
-    axios.get("http://localhost:8080").then((res) => {
+    axios.get("https://imagerep0.herokuapp.com/").then((res) => {
       setAllPics(res.data);
       console.log(props.allPics);
     });
@@ -61,7 +61,7 @@ const FilesUpload = (props) => {
     // add the user name to the output object
     formData.append("user", props.user.email)
 
-    const url = "http://localhost:8080/image-upload";
+    const url = "https://imagerep0.herokuapp.com/image-upload";
 
     const config = {
       headers: {
@@ -72,7 +72,7 @@ const FilesUpload = (props) => {
     };
 
     const getEm = () => {
-      axios.get("http://localhost:8080").then((res) => setAllPics(res.data));
+      axios.get("https://imagerep0.herokuapp.com/").then((res) => setAllPics(res.data));
       /* setAllPics(rez.data); */
     };
 
