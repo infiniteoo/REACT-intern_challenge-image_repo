@@ -1,3 +1,4 @@
+import { isValidObjectId } from "mongoose";
 import imgModel from "../models/images";
 import upload from '../services/image-upload'
 
@@ -15,22 +16,27 @@ export function getAllImages(req, res) {
   });
 }
 
+export function deleteImage(req, res) {
+
+    let ObjectId = require('mongodb').ObjectID
+
+    console.log(req.params.id)
+
+  imgModel.deleteOne({"_id" : ObjectId(req.params.id)}, (err, items) => {
+    if (err) {
+      console.log(err);
+      res.status(500).send("An error occurred: ", err);
+    } else {
+      
+      console.log(items)
+      res.json({message: "it was successful"})
+    }
+  });
+}
+
 export const postImage = (req, res, next) => {
 
-  console.log('-------------------------')
-  console.log(req.body)
-  console.log('-------------------------')
-  /* singleUpload(req, res, function (err) {
-    if (err) {
-      return res.status(422).send({
-        errors: [{ title: "Image Upload Error", detail: err.message }],
-      });
-    }
-    // create new imgModel db item with req.body.name, req.body.desc, and req.file.location 
-     
-   
-  }); */
-
+ 
   imgModel.create(
     {
       name: req.body.name,
@@ -47,35 +53,6 @@ export const postImage = (req, res, next) => {
       }
     }
   );
-    
+   
 
 };
-/* export const postImage = (req, res, next) => {
-
- 
-  singleUpload(req, res, function (err) {
-    if (err) {
-      return res.status(422).send({
-        errors: [{ title: "Image Upload Error", detail: err.message }],
-      });
-    }
-    // create new imgModel db item with req.body.name, req.body.desc, and req.file.location 
-     
-    imgModel.create(
-      {
-        name: req.body.name,
-        desc: req.body.desc,
-        imgURL: req.file.location,
-      },
-      {},
-      (error, success) => {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log(success);
-        }
-      }
-    );
-  });
-};
- */

@@ -11,28 +11,46 @@ import {
   Button,
 } from "@material-ui/core";
 import useStyles from "./ShowPicsStyles";
+import axios from 'axios'
 
 
 const ShowPics = (props) => {
     let { allPics  } = props
     const classes = useStyles();
+
+    const handleDelete = async (e) => {
+        const itemID = e.target.parentElement.id
+        // send axios request to back end to delete with the id
+        axios.delete(`http://localhost:8080/delete/${itemID}`)
+        .then((res) => {
+            axios.get("http://localhost:8080").then((res) => props.setAllPics(res.data));
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+       
+
+    }
+
     return (
        <>
           <CssBaseline />
           <Container className={classes.cardGrid} maxWidth="md">
           <Grid container spacing={4}>
-            {allPics.map((card) => (
-            <Grid item key={card.imgURL} xs={12} sm={6} md={4}>
-              <Card className={classes.card}>
+            {allPics.map((picture) => (
+            <Grid item key={picture.imgURL} xs={12} sm={6} md={4}>
+              <Card className={classes.picture}>
                 <CardMedia
                   className={classes.cardMedia}
-                  image={card.imgURL}
-                  title={card.name}
+                  image={picture.imgURL}
+                  title={picture.name}
                 />
                 <CardContent className={classes.cardContent}>
-                  <Typography gutterBottom variant="h5"> {card.name}</Typography>
+                  <Typography gutterBottom variant="h5"> {picture.name}</Typography>
                   <Typography>
-                    {card.desc}
+                    {picture.desc}
+                                       
+
                    
                   </Typography>
                 </CardContent>
@@ -40,7 +58,7 @@ const ShowPics = (props) => {
                   <Button size="small" color="primary">
                     View
                   </Button>
-                  <Button size="small" color="primary">
+                  <Button size="small" color="primary" id={picture._id} onClick={(e) => handleDelete(e)}>
                     Delete
                   </Button>
                 </CardActions>

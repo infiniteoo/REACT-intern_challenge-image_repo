@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FileUpload from "./components/FilesUpload";
+import FileUpload from "./components/FileUpload";
 import ShowPics from "./components/ShowPics";
 import {
   CircularProgress,

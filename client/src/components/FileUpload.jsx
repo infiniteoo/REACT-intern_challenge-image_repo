@@ -14,7 +14,7 @@ const FilesUpload = (props) => {
   const [open, setOpen] = React.useState(false);
 
   const getEm = () => {
-    axios.get("http://localhost:8080").then((res) => setAllPics(res.data));
+    axios.get("http://localhost:8080").then((res) => {setAllPics(res.data); console.log(props.allPics)});
   };
 
   useEffect(() => {
