@@ -59,7 +59,7 @@ const FilesUpload = (props) => {
     formData.append("image", selectedFile);
 
     // add the user name to the output object
-    formData.append("user", props.user.username)
+    formData.append("user", props.user.email)
 
     const url = "http://localhost:8080/image-upload";
 
@@ -83,6 +83,8 @@ const FilesUpload = (props) => {
         getEm();
       })
       .catch((err) => alert("File Upload Error"));
+
+    form.reset()
   };
 
   return (
@@ -97,7 +99,7 @@ const FilesUpload = (props) => {
             name="name"
             onChange={(e) => handleChange(e)}
             value={state.name}
-            InputProps={{ className: classes.textField }}
+            className={classes.textField}
           />
 
           <Typography variant="caption">Description: </Typography>
@@ -107,7 +109,7 @@ const FilesUpload = (props) => {
             name="desc"
             onChange={(e) => handleChange(e)}
             value={state.desc}
-            InputProps={{ className: classes.textField }}
+            className={classes.textField}
           />
           <FilePicker
             buttonProps={{

@@ -26,7 +26,7 @@ const App = () => {
       </AppBar>
       
       {allPics.length > 0 ? (
-        <ShowPics allPics={allPics} setAllPics={setAllPics} />
+        <ShowPics allPics={allPics} setAllPics={setAllPics} user={user} setUser={setUser} />
       ) : (
         <CircularProgress />
       )}

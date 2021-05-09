@@ -65,7 +65,7 @@ const LoginForm = (props) => {
             onChange={(e) => handleChange(e)}
             value={loginAndPassword.login}
             variant="outlined"
-            InputProps={{ className: classes.textField }}
+            className={classes.textField}
           />
 
           <Typography variant="h4" className={classes.loginLabel}>
@@ -78,7 +78,7 @@ const LoginForm = (props) => {
             onChange={(e) => handleChange(e)}
             variant="outlined"
             value={loginAndPassword.password}
-            InputProps={{ className: classes.textField }}
+            className={classes.textField}
           />
         </Container>
         <Button autoFocus color="secondary" onClick={(e) => handleLogin(e)} fullWidth>
