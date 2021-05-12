@@ -35,6 +35,8 @@ Demo Login:
 Login: "a@a.com"
 PW: "123"
 
+Please note:  upon initial connect to the live demo, it seems to take 15-20 seconds to boot up.  I am assuming this is either Netlify or S3 "warming up".  After this delay, the site will run nominally without delay.
+
 ### https://imagerep0.netlify.app/
 
 <!-- TABLE OF CONTENTS -->
